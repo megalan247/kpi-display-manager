@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1= siteId
+  p Below are the installed screens:
+  table
+    thead
+      tr: th Site ID
+          th Site URL
+          th Site Position
+    tbody
+      each site in sites
+        tr
+          td 
+            a(href='/screen/' + site.site_id)= site.site_id
+          td= site.site_url 
+          td= site.site_description

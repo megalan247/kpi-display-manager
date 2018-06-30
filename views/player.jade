@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  h1= did
+  p Below are the installed screens:
+  table
+    thead
+      tr: th Screen ID
+          th Screen Name
+          th Screen Layout
+    tbody
+      each screen in screens
+        tr
+          td 
+            a(href='/screen/' + screen.screen_id)= screen.screen_id
+          td= screen.screen_name 
+          td= screen.screen_layout
+  
+  form(method='POST' action='/register')
+          div.form-group
+            label(for='name') Name:
+            input#name.form-control(type='text', placeholder='first and last' name='name')
+          div.form-group
+            label(for='email') Email:
+            input#email.form-control(type='email', placeholder='name@email.com' name='email')
+          div.form-group
+            label(for='favoriteBook') Favorite Book:
+            input#favoriteBook.form-control(type='text', placeholder='title of book' name='favoriteBook')
+          div.form-group
+            label(for='pw') Password:
+            input#pw.form-control(type='password' name='password')
+          div.form-group
+            label(for='pw2') Confirm Password:
+            input#pw2.form-control(type='password' name='confirmPassword')
+          button.btn.btn-primary(type='submit') Sign up

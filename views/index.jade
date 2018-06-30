@@ -2,4 +2,16 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Below are the installed players:
+  table
+    thead
+      tr: th Player ID
+          th Player Name
+          th Player Status
+    tbody
+      each player in players
+        tr
+          td 
+            a(href='/player/' + player.player_id)= player.player_id
+          td= player.player_name 
+          td= player.player_status
