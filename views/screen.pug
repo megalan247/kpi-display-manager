@@ -18,7 +18,8 @@ block content
 			p #{screeninfo[0].screen_description}
 
 		ul.app-breadcrumb.breadcrumb
-			button.btn.btn-primary(type='button') Add New Site
+			a(href="/site/create/" + screenID)
+				button.btn.btn-primary(type='button') Add New Site
 
 	.row.user
 
@@ -53,7 +54,6 @@ block content
 				#player-settings.tab-pane.fade
 					.tile.user-settings
 						h4.line-head Edit Screen Settings
-
 						form(method='POST' action='/screen/update')
 							.row
 								.col-md-8.mb-4

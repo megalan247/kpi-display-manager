@@ -19,10 +19,7 @@ router.get("/getScreens/:playerId", screen_controller.getScreens);
 
 router.get("/getSites/:screenId", site_controller.getSites);
 
-router.get("/getCookies/:urlId", function(req, res) {
-    var num = req.params.urlId;
-    res.status(200).send("Listing cookies for URL Id " + num);
-});
+router.get("/getCookies/:urlId", cookie_controller.getCookies);
 
 router.get("/getJavascript/:urlId", function(req, res) {
     var num = req.params.urlId;

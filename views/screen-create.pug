@@ -22,36 +22,36 @@ block content
 		.col-md-12
 			.tile
 				h4.line-head Edit Player Settings
-					form(method='POST' action='/screen/create')
-						.row
-							.col-md-8.mb-4
-								label Associated Display ID
-								input.form-control(type="text", name="id", value=displayID, readOnly='')
+				form(method='POST' action='/screen/create')
+					.row
+						.col-md-8.mb-4
+							label Associated Display ID
+							input.form-control(type="text", name="id", value=displayID, readOnly='')
 
-							.clearfix
+						.clearfix
 
-							.col-md-8.mb-4
-								label Name
-								input.form-control(type="text", name="name")
+						.col-md-8.mb-4
+							label Name
+							input.form-control(type="text", name="name")
 
-							.clearfix
+						.clearfix
 
-							.col-md-8.mb-4
-								label Description
-								input.form-control(type="text", name="description")
+						.col-md-8.mb-4
+							label Description
+							input.form-control(type="text", name="description")
 
-							.clearfix
+						.clearfix
 
-							.col-md-8.mb-4
-								label Layout ID
-								select.form-control(name="layoutID")
-									option 1
-									option 2
-									option 3
-									option 4
+						.col-md-8.mb-4
+							label Layout ID
+							select.form-control(name="layoutID")
+								option 1
+								option 2
+								option 3
+								option 4
 
-						.row.mb-10
-							.col-md-12
-								button.btn.btn-primary(type="submit")
-									i.fa.fa-fw.fa-lg.fa-check-circle
-									|  Save
+					.row.mb-10
+						.col-md-12
+							button.btn.btn-primary(type="submit")
+								i.fa.fa-fw.fa-lg.fa-check-circle
+								|  Save

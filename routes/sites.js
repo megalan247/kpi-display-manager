@@ -31,7 +31,7 @@ router.get('/create/:screenID', function(req, res, next) {
   
       require('crypto').randomBytes(3, function(err, buffer) {
         var token = buffer.toString('hex');
-        con.query("INSERT INTO `db_displaymanager`.`tb_sites` (`site_id`, `site_url`, `site_description`, `screen_position`, `site_screenId`) VALUES ('" + token + "', '" + req.body.url + "', '" + req.body.description + "', '" + req.body.position + "', '" + req.body.id + "', 'PENDING');", function (err, result) {
+        con.query("INSERT INTO `db_displaymanager`.`tb_sites` (`site_id`, `site_url`, `site_description`, `site_position`, `site_screenId`) VALUES ('" + token + "', '" + req.body.url + "', '" + req.body.description + "', '" + req.body.position + "', '" + req.body.id + "');", function (err, result) {
             res.redirect("/site/view/"+token);
         }); 
       });

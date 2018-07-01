@@ -22,36 +22,43 @@ block content
 		.col-md-12
 			.tile
 				h4.line-head Edit Site Settings
-					form(method='POST' action='/site/create')
-						.row
-							.col-md-8.mb-4
-								label Associated Screen ID
-								input.form-control(type="text", name="id", value=screenID, readOnly='')
+				form(method='POST' action='/site/create')
+					.row
+						.col-md-8.mb-4
+							label Associated Screen ID
+							input.form-control(type="text", name="id", value=screenID, readOnly='')
 
-							.clearfix
+						.clearfix
 
-							.col-md-8.mb-4
-								label Name
-								input.form-control(type="text", name="name")
+						.col-md-8.mb-4
+							label Name
+							input.form-control(type="text", name="name")
 
-							.clearfix
+						.clearfix
 
-							.col-md-8.mb-4
-								label URL
-								input.form-control(type="text", name="url")
+						.col-md-8.mb-4
+							label Description
+							input.form-control(type="text", name="description")
 
-							.clearfix
+						.clearfix
 
-							.col-md-8.mb-4
-								label Site Position ID
-								select.form-control(name="position")
-									option 1
-									option 2
-									option 3
-									option 4
 
-						.row.mb-10
-							.col-md-12
-								button.btn.btn-primary(type="submit")
-									i.fa.fa-fw.fa-lg.fa-check-circle
-									|  Save
+						.col-md-8.mb-4
+							label URL
+							input.form-control(type="text", name="url")
+
+						.clearfix
+
+						.col-md-8.mb-4
+							label Site Position ID
+							select.form-control(name="position")
+								option 1
+								option 2
+								option 3
+								option 4
+
+					.row.mb-10
+						.col-md-12
+							button.btn.btn-primary(type="submit")
+								i.fa.fa-fw.fa-lg.fa-check-circle
+								|  Save
