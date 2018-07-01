@@ -3,21 +3,23 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var bodyParser = require("body-parser");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api');
 var playerRouter = require('./routes/player');
-var screenRouter = require('./routes/screens')
+var screenRouter = require('./routes/screens');
+var siteRouter = require('./routes/sites');
+var cookieRouter = require('./routes/cookie');
+var jsrouteRouter = require('./routes/jsroute');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
+app.set('view engine', 'pug');
+app.locals.basedir = path.join(__dirname, 'views');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -33,6 +35,9 @@ app.use('/users', usersRouter);
 app.use('/api/v1', apiRouter);
 app.use('/player', playerRouter);
 app.use('/screen', screenRouter);
+app.use('/site', siteRouter);
+app.use('/cookie', cookieRouter);
+app.use('/js', jsrouteRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

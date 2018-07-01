@@ -1,0 +1,16 @@
+extends layouts/_layout.pug
+
+block variables
+	- var activePage = 'dashboard'
+	- var activeGroup = 'none'
+
+block title
+	title Error
+
+block content
+	.page-error.tile
+		h1
+			i.fa.fa-exclamation-circle
+			|  #{error.status} #{message}
+		p= error.stack
+		p: a.btn.btn-primary(href="javascript:window.history.back();") Go Back

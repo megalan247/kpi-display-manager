@@ -1,0 +1,49 @@
+extends layouts/_layout.pug
+
+block variables
+	- var activePage = 'dashboard'
+	- var activeGroup = 'none'
+
+block title
+	title Edit JS #{jsID}
+
+block content
+
+
+	.app-title
+		div
+			h1
+				i.fa.fa-th-list
+				|  Edit JS #{jsID}
+			p Please enter new JS details
+
+	.row.user
+
+		.col-md-12
+			.tile
+				h4.line-head Edit JS Settings
+				form(method='POST' action='/js/update')
+					.row
+						.col-md-8.mb-4
+							label JS ID
+							input.form-control(type="text", name="id", value=jsresult[0].js_id, readOnly='')
+
+						.clearfix
+
+						.col-md-8.mb-4
+							label Associated Site ID
+							input.form-control(type="text", name="siteId", value=jsresult[0].js_siteId, readOnly='')
+
+						.clearfix
+
+						.col-md-8.mb-4
+							label Command
+							input.form-control(type="text", name="command", value=jsresult[0].js_command)
+
+						.clearfix
+
+					.row.mb-10
+						.col-md-12
+							button.btn.btn-primary(type="submit")
+								i.fa.fa-fw.fa-lg.fa-check-circle
+								|  Save

@@ -1,0 +1,89 @@
+extends layouts/_layout.pug
+
+block variables
+	- var activePage = 'dashboard'
+	- var activeGroup = 'none'
+
+block title
+	title View Screen #{screenID}
+
+block content
+
+
+	.app-title
+		div
+			h1
+				i.fa.fa-th-list
+				|  #{screeninfo[0].screen_name} (#{screenID})
+			p #{screeninfo[0].screen_description}
+
+		ul.app-breadcrumb.breadcrumb
+			button.btn.btn-primary(type='button') Add New Site
+
+	.row.user
+
+		.col-md-3
+			.tile.p-0
+				ul.nav.flex-column.nav-tabs.user-tabs
+					li.nav-item
+						a.nav-link.active(href='#player-screens' data-toggle='tab') Screens
+					li.nav-item
+						a.nav-link(href='#player-settings' data-toggle='tab') Settings
+
+		.col-md-9
+			.tab-content
+				#player-screens.tab-pane.active
+					.tile.user-timeline
+						h4.line-head Sites on Screen
+						table.table.table-hover.table-bordered
+							thead
+								tr: th Site ID
+										th Site URL
+										th Site Description
+										th Site Position
+							tbody
+								each site in sites
+									tr
+										td 
+											a(href='/site/view/' + site.site_id)= site.site_id
+										td= site.site_url
+										td= site.site_description
+										td= site.site_position
+
+				#player-settings.tab-pane.fade
+					.tile.user-settings
+						h4.line-head Edit Screen Settings
+
+						form(method='POST' action='/screen/update')
+							.row
+								.col-md-8.mb-4
+									label Screen ID
+									input.form-control(type="text", name="id", value=screenID, readOnly='')
+
+								.clearfix
+
+								.col-md-8.mb-4
+									label Name
+									input.form-control(type="text", name="name", value=screeninfo[0].screen_name)
+
+								.clearfix
+
+								.col-md-8.mb-4
+									label Description
+									input.form-control(type="text", name="description", value=screeninfo[0].screen_description)
+
+								.clearfix
+
+								.col-md-8.mb-4
+									label Layout ID
+									select.form-control(name="layoutID")
+										option(selected= screeninfo[0].screen_layout == 1) 1
+										option(selected= screeninfo[0].screen_layout == 2) 2
+										option(selected= screeninfo[0].screen_layout == 3) 3
+										option(selected= screeninfo[0].screen_layout == 4) 4
+
+							.row.mb-10
+								.col-md-12
+									button.btn.btn-primary(type="submit")
+										i.fa.fa-fw.fa-lg.fa-check-circle
+										|  Save

@@ -1,0 +1,58 @@
+extends /layouts/_layout.pug
+
+block variables
+	- var activePage = 'dashboard'
+	- var activeGroup = 'none'
+
+block title
+	title Player List
+
+block content
+	.app-title
+		div
+			h1
+				i.fa.fa-th-list
+				|  Player List
+			p List of all the installed players in our managemene software
+
+		ul.app-breadcrumb.breadcrumb
+			a(href="/player/create")
+				button.btn.btn-primary(type='button') Add New Player
+	.row
+		.col-md-12
+			.tile
+				.tile-body
+					table.table.table-hover.table-bordered#sampleTable
+						thead
+							tr
+								th ID
+								th Name
+								th Layout
+								th Location
+								th Status
+
+						tbody
+							each player in players 
+								tr
+									td 
+										a(href='/player/view/' + player.player_id)= player.player_id
+									td= player.player_name
+
+									td= player.player_type
+									td= player.player_location
+									td
+										if player.player_status=="ONLINE"
+											span.badge.badge-success= player.player_status
+										else if player.player_status=="PENDING"
+											span.badge.badge-warning= player.player_status
+										else
+											span.badge.badge-danger= player.player_status
+
+
+
+block specific-js
+	// Data table plugin
+	script(type='text/javascript', src="js/plugins/jquery.dataTables.min.js")
+	script(type='text/javascript', src="js/plugins/dataTables.bootstrap.min.js")
+	script(type='text/javascript').
+		$('#sampleTable').DataTable();

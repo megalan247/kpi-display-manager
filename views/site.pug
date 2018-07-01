@@ -1,0 +1,110 @@
+extends layouts/_layout.pug
+
+block variables
+	- var activePage = 'dashboard'
+	- var activeGroup = 'none'
+
+block title
+	title View Site #{siteId}
+
+block content
+
+
+	.app-title
+		div
+			h1
+				i.fa.fa-th-list
+				|  Site ID (#{siteId})
+			p #{siteinfo[0].site_description}
+			p #{siteinfo[0].site_url}
+
+		ul.pull-right
+			a(href="/cookie/create/" + siteId)
+				button.btn.btn-primary(type='button') Add New Cookie
+			a(href="/js/create/" + siteId)
+				button.btn.btn-primary(type='button') Add JS
+			
+
+	.row.user
+
+		.col-md-3
+			.tile.p-0
+				ul.nav.flex-column.nav-tabs.user-tabs
+					li.nav-item
+						a.nav-link.active(href='#site-cookies' data-toggle='tab') Cookies
+					li.nav-item
+						a.nav-link(href='#site-javascript' data-toggle='tab') JavaScript					
+					li.nav-item
+						a.nav-link(href='#site-settings' data-toggle='tab') Settings
+
+		.col-md-9
+			.tab-content
+				#site-cookies.tab-pane.active
+					.tile
+						h4.line-head Cookies
+						table.table.table-hover.table-bordered
+							thead
+								tr: th Cookie ID
+									th Cookie URL
+									th Cookie Description
+									th Cookie Position
+							tbody
+								each cookie in cookies
+									tr
+										td 
+											a(href='/cookie/view/' + cookie.cookie_id)= cookie.cookie_id
+										td= cookie.cookie_name
+										td= cookie.cookie_value
+										td= cookie.cookie_url
+				#site-javascript.tab-pane.fade
+					.tile
+						h4.line-head JavaScript
+						table.table.table-hover.table-bordered
+							thead
+								tr: th JS ID
+									th JS Command
+							tbody
+								each js_com in js
+									tr
+										td 
+											a(href='/js/view/' + js_com.js_id)= js_com.js_id
+										td= js_com.js_command
+
+				#site-settings.tab-pane.fade
+					.tile
+						h4.line-head Edit Site Settings
+
+						form(method='POST' action='/site/update')
+							.row
+
+								.col-md-8.mb-4
+									label ID
+									input.form-control(type="text", name="id", value=siteinfo[0].site_id, readOnly='')
+
+								.clearfix
+
+								.col-md-8.mb-4
+									label URL
+									input.form-control(type="text", name="url", value=siteinfo[0].site_url)
+
+								.clearfix
+
+								.col-md-8.mb-4
+									label Description
+									input.form-control(type="text", name="description" ,value=siteinfo[0].site_description)
+
+								.clearfix
+
+								.col-md-8.mb-4
+									label Position ID
+									select.form-control(name="position")
+										option(selected= siteinfo[0].site_position == 1) 1
+										option(selected= siteinfo[0].site_position == 2) 2
+										option(selected= siteinfo[0].site_position == 3) 3
+										option(selected= siteinfo[0].site_position == 4) 4
+
+							.row.mb-10
+								.col-md-12
+									button.btn.btn-primary(type="submit")
+										i.fa.fa-fw.fa-lg.fa-check-circle
+										|  Save

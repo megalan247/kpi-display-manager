@@ -1,0 +1,43 @@
+extends layouts/_layout.pug
+
+block variables
+	- var activePage = 'dashboard'
+	- var activeGroup = 'none'
+
+block title
+	title New JS for siteID #{siteID}
+
+block content
+
+
+	.app-title
+		div
+			h1
+				i.fa.fa-th-list
+				|  New JS for Site #{siteID}
+			p Please enter new cookie details
+
+	.row.user
+
+		.col-md-12
+			.tile
+				h4.line-head Edit Cookie Settings
+				form(method='POST' action='/js/create')
+					.row
+						.col-md-8.mb-4
+							label Associated Site ID
+							input.form-control(type="text", name="id", value=siteID, readOnly='')
+
+						.clearfix
+
+						.col-md-8.mb-4
+							label Command
+							input.form-control(type="text", name="command")
+
+						.clearfix
+
+					.row.mb-10
+						.col-md-12
+							button.btn.btn-primary(type="submit")
+								i.fa.fa-fw.fa-lg.fa-check-circle
+								|  Save

@@ -3,26 +3,43 @@ var router = express.Router();
 
 var con = require('../db_helper');
 
-router.get('/:did', function(req, res, next) {
+var bodyParser = require('body-parser')
+router.use( bodyParser.json() );       // to support JSON-encoded bodies
+router.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
 
-    con.query("SELECT S.screen_id, S.screen_name, S.screen_layout, S.screen_status FROM tb_players P INNER JOIN tb_screens S ON P.player_id = S.screen_playerId WHERE player_id LIKE \"" + req.params.did + "\"", function (err, result) {
-      res.render('player', { did: req.params.did,  screens: result});
+router.get('/view/:did', function(req, res, next) {
+
+    con.query("SELECT * FROM tb_screens  WHERE screen_playerId LIKE \"" + req.params.did + "\"", function (err, screenresult) {
+      con.query("SELECT * FROM tb_players  WHERE player_id LIKE \"" + req.params.did + "\"", function (err, playerresult) {
+        res.render('player.pug', { did: req.params.did,  screens: screenresult, playerinfo: playerresult});
+      }); 
     }); 
   
 });
 
-router.post('/:did/create', function(req, res, next) {
+router.get('/create', function(req, res, next) {
 
-    con.query("SELECT * FROM tb_sites WHERE site_ScreenId LIKE \"" + req.body.siteId + "\"", function (err, result) {
-        res.render('screen', { siteId: req.params.siteId,  sites: result});
-    }); 
+  res.render('player-create');
+
+});
+
+router.post('/create', function(req, res, next) {
+
+    require('crypto').randomBytes(3, function(err, buffer) {
+      var token = buffer.toString('hex');
+      con.query("INSERT INTO `db_displaymanager`.`tb_players` (`player_id`, `player_name`, `player_description`, `player_location`, `player_status`) VALUES (\"" + token + "\", \"" + req.body.name + "\", \"" + req.body.description + "\", \"" + req.body.location + "\", \"PENDING\");", function (err, result) {
+        res.redirect("/player/view/"+token);
+      }); 
+    });
   
 });
 
-router.post('/:did/update', function(req, res, next) {
+router.post('/update', function(req, res, next) {
 
-  con.query("SELECT * FROM tb_sites WHERE site_ScreenId LIKE \"" + req.params.siteId + "\"", function (err, result) {
-      res.render('screen', { siteId: req.params.siteId,  sites: result});
+  con.query("UPDATE `db_displaymanager`.`tb_players` SET `player_name`='" + req.body.name + "', `player_description`='" + req.body.description +"', `player_location`='" + req.body.location + "' WHERE `player_id`='" + req.body.id + "';", function (err, result) {
+    res.redirect("/player/view/"+req.body.id);
   }); 
 
 });

@@ -1,0 +1,92 @@
+extends layouts/_layout.pug
+
+block variables
+	- var activePage = 'dashboard'
+	- var activeGroup = 'none'
+
+block title
+	title View Player #{did}
+
+block content
+
+
+	.app-title
+		div
+			h1
+				i.fa.fa-th-list
+				|  #{playerinfo[0].player_name} (#{did})
+			p #{playerinfo[0].player_description}
+
+		ul.app-breadcrumb.breadcrumb
+			a(href="/screen/create/" + did)
+				button.btn.btn-primary(type='button') Add New Screen
+
+	.row.user
+
+		.col-md-3
+			.tile.p-0
+				ul.nav.flex-column.nav-tabs.user-tabs
+					li.nav-item
+						a.nav-link.active(href='#player-screens' data-toggle='tab') Screens
+					li.nav-item
+						a.nav-link(href='#player-settings' data-toggle='tab') Settings
+
+		.col-md-9
+			.tab-content
+				#player-screens.tab-pane.active
+					.tile.user-timeline
+						h4.line-head Screens
+						table.table.table-hover.table-bordered
+							thead
+								tr
+									th ID
+									th Name
+									th Layout ID
+									th Status
+
+							tbody
+								each screen in screens 
+									tr
+										td 
+											a(href='/screen/view/' + screen.screen_id)= screen.screen_id
+										td= screen.screen_name
+										td= screen.screen_layout
+										td
+											if screen.screen_status=="DISPLAYED"
+												span.badge.badge-success= screen.screen_status
+											else
+												span.badge.badge-warning= screen.screen_status
+
+				#player-settings.tab-pane.fade
+					.tile.user-settings
+						h4.line-head Edit Player Settings
+
+						form(method='POST' action='/player/update')
+							.row
+								.col-md-8.mb-4
+									label ID
+									input.form-control(type="text", name="id", value=playerinfo[0].player_id, readOnly='')
+
+								.clearfix
+
+								.col-md-8.mb-4
+									label Name
+									input.form-control(type="text", name="name", value=playerinfo[0].player_name)
+
+								.clearfix
+
+								.col-md-8.mb-4
+									label Description
+									input.form-control(type="text", name="description", value=playerinfo[0].player_description)
+
+								.clearfix
+
+								.col-md-8.mb-4
+									label Location
+									input.form-control(type="text", name="location", value=playerinfo[0].player_name)
+
+							.row.mb-10
+								.col-md-12
+									button.btn.btn-primary(type="submit")
+										i.fa.fa-fw.fa-lg.fa-check-circle
+										|  Save

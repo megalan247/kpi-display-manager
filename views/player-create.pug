@@ -1,0 +1,48 @@
+extends layouts/_layout.pug
+
+block variables
+	- var activePage = 'dashboard'
+	- var activeGroup = 'none'
+
+block title
+	title Create New Player
+
+block content
+
+
+	.app-title
+		div
+			h1
+				i.fa.fa-th-list
+				|  Create New Player
+			p Please enter new player details
+
+	.row.user
+
+		.col-md-12
+			.tile
+				h4.line-head Edit Player Settings
+				
+				form(method='POST' action='/player/create')
+					.row
+						.col-md-8.mb-4
+							label Name
+							input.form-control(type="text", name="name")
+
+						.clearfix
+
+						.col-md-8.mb-4
+							label Description
+							input.form-control(type="text", name="description")
+
+						.clearfix
+
+						.col-md-8.mb-4
+							label Location
+							input.form-control(type="text", name="location")
+
+					.row.mb-10
+						.col-md-12
+							button.btn.btn-primary(type="submit")
+								i.fa.fa-fw.fa-lg.fa-check-circle
+								|  Save
