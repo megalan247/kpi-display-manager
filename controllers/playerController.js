@@ -8,20 +8,23 @@ exports.listPlayers = function(req, res) {
 }
 
 exports.createPlayer = function(req, res) {
-    con.query("SELECT * FROM tb_players", function (err, result) {
+/*     con.query("SELECT * FROM tb_players", function (err, result) {
         res.send(result);
-    });    
+    });  */
+    res.send("NOT IMPLIMENTED");
 }
 
 exports.editPlayer = function(req, res) {
-    con.query("SELECT * FROM tb_players", function (err, result) {
+/*     con.query("SELECT * FROM tb_players", function (err, result) {
         res.send(result);
-    });    
+    });    */ 
+    res.send("NOT IMPLIMENTED");
 }
 
 exports.getPlayer = function(req, res) {
-    con.query("SELECT * FROM tb_players WHERE player_id LIKE '" + SqlString.escape(req.params.playerId) + "'", function (err, result) {
+    con.query("SELECT * FROM tb_players WHERE player_id LIKE " + SqlString.escape(req.params.playerId), function (err, result) {
         res.send(result);
+        console.log(err);
     });
 }
 
