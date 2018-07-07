@@ -19,10 +19,14 @@ router.get("/getScreens/:playerId", screen_controller.getScreens);
 
 router.get("/getSites/:screenId", site_controller.getSites);
 
+router.get("/getElectronScreen/:electronId", screen_controller.getElectronScreens);
+
 router.get("/getCookies/:siteId", cookie_controller.getCookies);
 
 router.get("/getJavascript/:siteId", js_controller.getJS);
 
 router.post("/registerPlayer", player_controller.registerPlayer);
+
+router.post("/registerScreen", screen_controller.registerScreen)
   
 module.exports = router;
