@@ -20,7 +20,8 @@ router.get('/view/:screenID', function(req, res, next) {
   
 });
 
-router.get('/create/:displayID', function(req, res, next) {
+
+/* router.get('/create/:displayID', function(req, res, next) {
 
     res.render('screen-create', {displayID: req.params.displayID});
   
@@ -35,7 +36,9 @@ router.get('/create/:displayID', function(req, res, next) {
         }); 
       });
     
-  });
+  }); */
+
+
   
   router.post('/update', function(req, res, next) {
   

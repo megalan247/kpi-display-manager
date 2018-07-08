@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const request = require('request');
 
 var con = require('../db_helper');
 
@@ -19,7 +20,14 @@ router.get('/view/:did', function(req, res, next) {
   
 });
 
-router.get('/create', function(req, res, next) {
+
+router.get("/sendUpdate/:displayID", function(req, res, next) {
+  con.query("SELECT player_IP FROM tb_players  WHERE player_id LIKE \"" + req.params.did + "\"", function (err, playerresult) {
+    request("http://"+playerresult.player_IP+":4000/update");
+  }); 
+});
+
+/* router.get('/create', function(req, res, next) {
 
   res.render('player-create');
 
@@ -34,7 +42,7 @@ router.post('/create', function(req, res, next) {
       }); 
     });
   
-});
+}); */
 
 router.post('/update', function(req, res, next) {
 
