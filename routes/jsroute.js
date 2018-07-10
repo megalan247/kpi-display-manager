@@ -28,14 +28,14 @@ router.post('/create', function(req, res, next) {
       require('crypto').randomBytes(3, function(err, buffer) {
         var token = buffer.toString('hex');
         con.query("INSERT INTO `db_displaymanager`.`tb_js` (`js_id`, `js_siteId`, `js_command`) VALUES ('" + token + "', " + SqlString.escape(req.body.id) + ", " + SqlString.escape(req.body.command) + ");", function (err, result) {
-            res.redirect("/js/view/"+token);
+            res.redirect("/site/view/"+req.body.id);
         }); 
       });
     
 });
   
 router.post('/update', function(req, res, next) {
-    con.query("UPDATE `db_displaymanager`.`tb_js` SET `js_command`='" + req.body.command + "' WHERE `js_id`='" + req.body.id + "';", function (err, result) {
+    con.query("UPDATE `db_displaymanager`.`tb_js` SET `js_command`=" + SqlString.escape(req.body.command) + " WHERE `js_id`=" + SqlString.escape(req.body.id) + ";", function (err, result) {
         res.redirect("/site/view/"+req.body.siteId);
     }); 
   
