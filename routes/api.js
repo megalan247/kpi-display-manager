@@ -23,9 +23,11 @@ router.get("/getElectronScreen/:electronId", screen_controller.getElectronScreen
 
 router.get("/getCookies/:siteId", cookie_controller.getCookies);
 
-router.get("/getJavascript/:siteId", js_controller.getJS);
+router.get("/getJavaScript/:siteId", js_controller.getJS);
 
 router.post("/registerPlayer", player_controller.registerPlayer);
+
+router.post("/updatePlayer", player_controller.updatePlayer);
 
 router.post("/registerScreen", screen_controller.registerScreen)
   

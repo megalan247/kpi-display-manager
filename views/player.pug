@@ -18,7 +18,7 @@ block content
 			p #{playerinfo[0].player_description}
 
 		ul.app-breadcrumb.breadcrumb
-			a(href="/sendUpdate/" + did)
+			a(onClick="sendUpdate('http://" + playerinfo[0].player_IP + ":4000/update')")
 				button.btn.btn-primary(type='button') Update Config on Screen
 
 	.row.user
@@ -71,7 +71,7 @@ block content
 
 								.col-md-8.mb-4
 									label Name
-									input.form-control(type="text", name="name", value=playerinfo[0].player_name)
+									input.form-control(type="text", name="name", value=playerinfo[0].player_name, readOnly='')
 
 								.clearfix
 
@@ -90,3 +90,10 @@ block content
 									button.btn.btn-primary(type="submit")
 										i.fa.fa-fw.fa-lg.fa-check-circle
 										|  Save
+
+	script.
+		function sendUpdate(theUrl){
+			var xmlHttp = new XMLHttpRequest();
+			xmlHttp.open("GET", theUrl, true);
+			xmlHttp.send(null);
+		}
