@@ -4,7 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require("body-parser");
-const basicAuth = require('express-basic-auth')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -21,12 +20,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.locals.basedir = path.join(__dirname, 'views');
-
-app.use(basicAuth({
-  users: { 'admin': 'Leipzig' },
-  challenge: true,
-  realm: 'kpi-display-manager',
-}));
 
 app.use(logger('dev'));
 app.use(express.json());
