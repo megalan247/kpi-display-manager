@@ -25,7 +25,9 @@ block content
 								th Location
 								th Player Model
 								th Hostname
+								th IP Address
 								th Status
+								th Actions
 
 						tbody
 							each player in players 
@@ -36,12 +38,14 @@ block content
 										a(href='/player/view/' + player.player_id)= player.player_location
 
 									td 
-										if player.player_type === "Computer"
+										if player.player_type == "Computer"
 											a(href='/player/view/' + player.player_id)= "Raspberry Pi"
 										else
 											a(href='/player/view/' + player.player_id)= player.player_type
 									td
 										a(href='/player/view/' + player.player_id)= player.player_name
+									td
+										a(href='/player/view/' + player.player_id)= player.player_IP
 									td
 										if player.player_lastPing > (Date.now() - 10*60000)
 											span.badge.badge-success= "ONLINE"
@@ -49,6 +53,9 @@ block content
 											span.badge.badge-warning= "LATE"
 										else
 											span.badge.badge-danger= "OFFLINE"
+									td
+										button.btn.btn-primary(type='button' onClick="sendUpdate('http://" + player.player_IP + ":4000/update')") Update Config
+										button.btn.btn-secondary(type='button' onClick="sendUpdate('http://" + player.player_IP + ":4000/upgrade')") Upgrade Application
 
 
 
@@ -58,3 +65,10 @@ block specific-js
 	script(type='text/javascript', src="js/plugins/dataTables.bootstrap.min.js")
 	script(type='text/javascript').
 		$('#dataTable').DataTable();
+
+	script.
+		function sendUpdate(theUrl){
+			var xmlHttp = new XMLHttpRequest();
+			xmlHttp.open("GET", theUrl, true);
+			xmlHttp.send(null);
+		}
