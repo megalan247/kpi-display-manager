@@ -27,9 +27,9 @@ block content
 						thead
 							tr
 								th ID
-								th Name
-								th Layout
 								th Location
+								th Layout
+								th Hostname
 								th Status
 
 						tbody
@@ -37,10 +37,16 @@ block content
 								tr
 									td 
 										a(href='/player/view/' + player.player_id)= player.player_id
-									td= player.player_name
+									td
+										a(href='/player/view/' + player.player_id)= player.player_location
 
-									td= player.player_type
-									td= player.player_location
+									td 
+										if player.player_type == "Computer"
+											a(href='/player/view/' + player.player_id)= "Raspberry Pi"
+										else
+											a(href='/player/view/' + player.player_id)= player.player_type
+									td
+										a(href='/player/view/' + player.player_id)= player.player_name
 									td
 										if player.player_lastPing > (Date.now() - 10*60000)
 											span.badge.badge-success= "ONLINE"
