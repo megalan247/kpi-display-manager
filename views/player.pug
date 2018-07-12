@@ -20,6 +20,9 @@ block content
 		ul.app-breadcrumb.breadcrumb
 			a(onClick="sendUpdate('http://" + playerinfo[0].player_IP + ":4000/update')")
 				button.btn.btn-primary(type='button') Update Config on Screen
+		ul.app-breadcrumb.breadcrumb
+			a(onClick="sendUpdate('http://" + playerinfo[0].player_IP + ":4000/upgrade')")
+				button.btn.btn-primary(type='button') Upgrade Player Version
 
 	.row.user
 
