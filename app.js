@@ -25,7 +25,7 @@ app.locals.basedir = path.join(__dirname, 'views');
 app.use(basicAuth({
   users: { 'admin': 'Leipzig' },
   challenge: true,
-  realm: 'displaymanager',
+  realm: 'kpi-display-manager',
 }));
 
 app.use(logger('dev'));
