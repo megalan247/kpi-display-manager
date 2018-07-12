@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const request = require('request');
 
 var con = require('../db_helper');
 
@@ -19,7 +20,31 @@ router.get('/view/:did', function(req, res, next) {
   
 });
 
-router.get('/create', function(req, res, next) {
+
+router.get("/", function(req, res, next) {
+  con.query("SELECT * FROM tb_org", function (err, orgresult) {
+    con.query("SELECT * FROM tb_building", function (err, buildingresult) {
+      con.query("SELECT * FROM tb_floor", function (err, floorresult) {
+        con.query("SELECT * FROM tb_room", function (err, roomresult) {
+          con.query("SELECT * FROM tb_players", function (err, playerresult) {
+            con.query("SELECT * FROM tb_screens", function (err, screenresult) {
+              res.render('index.pug', {
+                orgs: orgresult,
+                buildings: buildingresult, 
+                floors: floorresult,
+                rooms: roomresult, 
+                players: playerresult,
+                screens: screenresult
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+});
+
+/* router.get('/create', function(req, res, next) {
 
   res.render('player-create');
 
@@ -34,7 +59,7 @@ router.post('/create', function(req, res, next) {
       }); 
     });
   
-});
+}); */
 
 router.post('/update', function(req, res, next) {
 

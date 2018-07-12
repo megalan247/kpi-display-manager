@@ -28,7 +28,7 @@ router.get('/create/:siteID', function(req, res, next) {
       require('crypto').randomBytes(3, function(err, buffer) {
         var token = buffer.toString('hex');
         con.query("INSERT INTO `db_displaymanager`.`tb_cookies` (`cookie_id`, `cookie_siteId`, `cookie_name`, `cookie_value`, `cookie_url`, `cookie_domain`, `cookie_path`, `cookie_expiration`) VALUES ('" + token + "', '" + req.body.id + "', '" + req.body.name + "', '" + req.body.value + "', '" + req.body.url + "', '" + req.body.domain + "', '" + req.body.path + "', '" + req.body.expiration + "');", function (err, result) {
-            res.redirect("/cookie/view/"+token);
+            res.redirect("/site/view/" + req.body.id);
         }); 
       });
     

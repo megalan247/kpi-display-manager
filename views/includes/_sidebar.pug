@@ -3,111 +3,95 @@ aside.app-sidebar
 
 	ul.app-menu
 		li
-			a.app-menu__item(href='/' class={'active': activePage == 'dashboard'})
-				i.app-menu__icon.fa.fa-dashboard
+			a.app-menu__item.d-none(href='/' class={'active': activePage == 'dashboard'})
+				i.app-menu__icon.fa.fa-tachometer-alt
 				span.app-menu__label Dashboard
 
-		li.treeview(class={'is-expanded': activeGroup == 'ui-elements'})
+		li.treeview(class={'is-expanded': activeGroup == 'devices'})
 			a.app-menu__item(href='#', data-toggle='treeview')
 				i.app-menu__icon.fa.fa-laptop
-				span.app-menu__label UI Elements
+				span.app-menu__label Devices
 				i.treeview-indicator.fa.fa-angle-right
 			ul.treeview-menu
 				li
-					a.treeview-item(href='bootstrap-components.html' class={'active': activePage == 'ui-bootstrap'})
+					a.treeview-item(href='/players' class={'active': activePage == 'enrolled-devices'})
 						i.icon.fa.fa-circle-o
-						|  Bootstrap Elements
+						|  Enrolled Devices
 				li
-					a.treeview-item(href='https://fontawesome.com/v4.7.0/icons/', target="_blank", rel="noopener")
+					a.treeview-item.d-none(href='#' class={'active': activePage == 'pending-devices'})
 						i.icon.fa.fa-circle-o
-						|  Font Icons
-				li
-					a.treeview-item(href='ui-cards.html' class={'active': activePage == 'ui-cards'})
-						i.icon.fa.fa-circle-o
-						|  Cards
-				li
-					a.treeview-item(href='widgets.html' class={'active': activePage == 'ui-widgets'})
-						i.icon.fa.fa-circle-o
-						|  Widgets
+						|  Pending Devices
 
-		li
-			a.app-menu__item(href='charts.html' class={'active': activePage == 'charts'})
-				i.app-menu__icon.fa.fa-pie-chart
-				span.app-menu__label Charts
+		li.treeview.d-none(class={'is-expanded': activeGroup == 'scheduler'})
+			a.app-menu__item(href='#')
+				i.app-menu__icon.fa.fa-calendar-alt
+				span.app-menu__label Scheduler
 
-		li.treeview(class={'is-expanded': activeGroup == 'forms'})
+		li.treeview.d-none(class={'is-expanded': activeGroup == 'forms'})
 			a.app-menu__item(href='#' data-toggle='treeview')
-				i.app-menu__icon.fa.fa-edit
-				span.app-menu__label Forms
+				i.app-menu__icon.fas.fa-building
+				span.app-menu__label Locations
 				i.treeview-indicator.fa.fa-angle-right
 			ul.treeview-menu
 				li
-					a.treeview-item(href='form-components.html' class={'active': activePage == 'form-components'})
+					a.treeview-item(href='#' class={'active': activePage == '#'})
 						i.icon.fa.fa-circle-o
-						|  Form Components
+						|  Organisations
 				li
-					a.treeview-item(href='form-custom.html' class={'active': activePage == 'form-custom'})
+					a.treeview-item(href='#' class={'active': activePage == '#'})
 						i.icon.fa.fa-circle-o
-						|  Custom Components
-				li
-					a.treeview-item(href='form-samples.html' class={'active': activePage == 'form-samples'})
-						i.icon.fa.fa-circle-o
-						|  Form Samples
-				li
-					a.treeview-item(href='form-notifications.html' class={'active': activePage == 'form-notifications'})
-						i.icon.fa.fa-circle-o
-						|  Form Notifications
+						|  Buildings
 
-		li.treeview(class={'is-expanded': activeGroup == 'tables'})
-			a.app-menu__item(href='#' data-toggle='treeview')
-				i.app-menu__icon.fa.fa-th-list
-				span.app-menu__label Tables
-				i.treeview-indicator.fa.fa-angle-right
-			ul.treeview-menu
 				li
-					a.treeview-item(href='table-basic.html' class={'active': activePage == 'basic-table'})
+					a.treeview-item(href='#' class={'active': activePage == '#'})
 						i.icon.fa.fa-circle-o
-						|  Basic Tables
-				li
-					a.treeview-item(href='table-data-table.html' class={'active': activePage == 'data-table'})
-						i.icon.fa.fa-circle-o
-						|  Data Tables
+						|  Floors
 
-		li.treeview(class={'is-expanded': activeGroup == 'pages'})
+		li.treeview.d-none(class={'is-expanded': activeGroup == 'forms'})
 			a.app-menu__item(href='#' data-toggle='treeview')
-				i.app-menu__icon.fa.fa-file-text
-				span.app-menu__label Pages
+				i.app-menu__icon.fa.fa-cookie
+				span.app-menu__label Cookies
 				i.treeview-indicator.fa.fa-angle-right
 			ul.treeview-menu
 				li
-					a.treeview-item(href='blank-page.html' class={'active': activePage == 'blank-page'})
+					a.treeview-item(href='#' class={'active': activePage == '#'})
 						i.icon.fa.fa-circle-o
-						|  Blank Page
+						|  Cookies
 				li
-					a.treeview-item(href='page-login.html')
+					a.treeview-item(href='#' class={'active': activePage == '#'})
 						i.icon.fa.fa-circle-o
-						|  Login Page
+						|  Cookie Groups
+				
+		li.treeview.d-none(class={'is-expanded': activeGroup == 'forms'})
+			a.app-menu__item(href='#' data-toggle='treeview')
+				i.app-menu__icon.fab.fa-js
+				span.app-menu__label JavaScript
+				i.treeview-indicator.fa.fa-angle-right
+			ul.treeview-menu
 				li
-					a.treeview-item(href='page-lockscreen.html')
+					a.treeview-item(href='#' class={'active': activePage == '#'})
 						i.icon.fa.fa-circle-o
-						|  Lockscreen Page
+						|  JavaScript
 				li
-					a.treeview-item(href='page-user.html' class={'active': activePage == 'user-page'})
+					a.treeview-item(href='#' class={'active': activePage == '#'})
 						i.icon.fa.fa-circle-o
-						|  User Page
+						|  JavaScript Groups
+
+		li.treeview.d-none(class={'is-expanded': activeGroup == 'tables'})
+			a.app-menu__item(href='#' data-toggle='treeview')
+				i.app-menu__icon.fa.fa-users
+				span.app-menu__label Admin
+				i.treeview-indicator.fa.fa-angle-right
+			ul.treeview-menu
 				li
-					a.treeview-item(href='page-invoice.html' class={'active': activePage == 'invoice-page'})
+					a.treeview-item(href='#' class={'active': activePage == 'basic-table'})
 						i.icon.fa.fa-circle-o
-						|  Invoice Page
+						|  Users
 				li
-					a.treeview-item(href='page-calendar.html' class={'active': activePage == 'calendar-page'})
+					a.treeview-item(href='#' class={'active': activePage == 'data-table'})
 						i.icon.fa.fa-circle-o
-						|  Calendar Page
+						|  Groups
 				li
-					a.treeview-item(href='page-mailbox.html' class={'active': activePage == 'mailbox-page'})
+					a.treeview-item(href='#' class={'active': activePage == 'data-table'})
 						i.icon.fa.fa-circle-o
-						|  Mailbox
-				li
-					a.treeview-item(href='page-error.html' class={'active': activePage == 'error-page'})
-						i.icon.fa.fa-circle-o
-						|  Error Page
+						|  Settings

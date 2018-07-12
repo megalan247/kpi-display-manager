@@ -1,8 +1,8 @@
 extends /layouts/_layout.pug
 
 block variables
-	- var activePage = 'dashboard'
-	- var activeGroup = 'none'
+	- var activePage = 'enrolled-devices'
+	- var activeGroup = 'devices'
 
 block title
 	title Player List
@@ -19,10 +19,11 @@ block content
 			a(href="/player/create")
 				button.btn.btn-primary(type='button') Add New Player
 	.row
+
 		.col-md-12
 			.tile
 				.tile-body
-					table.table.table-hover.table-bordered#sampleTable
+					table.table.table-hover.table-bordered#dataTable
 						thead
 							tr
 								th ID
@@ -41,12 +42,12 @@ block content
 									td= player.player_type
 									td= player.player_location
 									td
-										if player.player_status=="ONLINE"
-											span.badge.badge-success= player.player_status
-										else if player.player_status=="PENDING"
-											span.badge.badge-warning= player.player_status
+										if player.player_lastPing > (Date.now() - 10*60000)
+											span.badge.badge-success= "ONLINE"
+										else if player.player_lastPing > (Date.now() - 20*60000)
+											span.badge.badge-warning= "LATE"
 										else
-											span.badge.badge-danger= player.player_status
+											span.badge.badge-danger= "OFFLINE"
 
 
 
@@ -55,4 +56,4 @@ block specific-js
 	script(type='text/javascript', src="js/plugins/jquery.dataTables.min.js")
 	script(type='text/javascript', src="js/plugins/dataTables.bootstrap.min.js")
 	script(type='text/javascript').
-		$('#sampleTable').DataTable();
+		$('#dataTable').DataTable();
