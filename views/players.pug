@@ -41,7 +41,7 @@ block content
 										a(href='/player/view/' + player.player_id)= player.player_location
 
 									td 
-										if player.player_type == "Computer"
+										if player.player_type === "Computer"
 											a(href='/player/view/' + player.player_id)= "Raspberry Pi"
 										else
 											a(href='/player/view/' + player.player_id)= player.player_type
