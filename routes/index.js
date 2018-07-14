@@ -5,9 +5,7 @@ var con = require('../db_helper');
 
 
 router.get('/', function(req, res, next) {
-
   res.redirect("/players");
-
 });
 
 router.get('/players', function(req, res, next) {
