@@ -28,7 +28,7 @@ router.get("/", function(req, res, next) {
         con.query("SELECT * FROM tb_room", function (err, roomresult) {
           con.query("SELECT * FROM tb_players", function (err, playerresult) {
             con.query("SELECT * FROM tb_screens", function (err, screenresult) {
-              res.render('index.pug', {
+              res.render('players', {
                 orgs: orgresult,
                 buildings: buildingresult, 
                 floors: floorresult,

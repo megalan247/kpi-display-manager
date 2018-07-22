@@ -15,6 +15,33 @@ block content
 				|  Player List
 			p List of all the installed players in our managemene software
 	.row
+
+		.col-md-3.d-none
+			.tile#treeView
+				ul
+					each org in orgs
+						li(data-jstree='{"icon": "fas fa-sitemap", "opened" : true}')= org.org_name
+							ul
+								each bld in buildings
+									if bld.building_orgId == org.org_id
+										li(data-jstree='{"icon": "fas fa-building", "opened" : true}')= bld.building_name
+											ul
+												each floor in floors
+													if floor.floor_buildingId == bld.building_id
+														li(data-jstree='{"icon": "fas fa-align-justify", "opened" : true}')=floor.floor_name
+															ul
+																each room in rooms
+																	if room.room_floorId == floor.floor_id
+																		li(data-jstree='{"icon": "fas fa-door-closed"}')= room.room_name
+																			ul
+																				each player in players
+																					if player.player_roomId == room.room_id
+																						li(data-jstree='{"icon": "fas fa-play"}')= player.player_name
+																							ul
+																								each screen in screens
+																									if screen.screen_playerId == player.player_id
+																										li(data-jstree='{"icon": "fas fa-tv"}')= screen.screen_name
+																				
 		.col-md-12
 			.tile
 				.tile-body
@@ -75,3 +102,16 @@ block specific-js
 			xmlHttp.open("GET", theUrl, true);
 			xmlHttp.send(null);
 		}
+
+	script.
+		$(function() {
+			$('#treeView').jstree({
+				"core" : { // core options go here
+				"multiple" : false, // no multiselection
+				"themes" : {
+					"dots" : false // no connecting dots between dots
+				}
+			},
+			"plugins" : [ "sort" ]
+			});
+		});
