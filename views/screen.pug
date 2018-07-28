@@ -82,6 +82,23 @@ block content
 										option(selected= screeninfo[0].screen_layout == 3) 3
 										option(selected= screeninfo[0].screen_layout == 4) 4
 										option(selected= screeninfo[0].screen_layout == 5) 5
+									br
+									a(data-toggle="collapse" href="#layoutInfo" aria-expanded="false" aria-controls="#layoutInfo") What do these ID's mean?
+									br
+									.collapse#layoutInfo
+										label.d-block Layout 1
+										img.d-block(src="/img/layout_images/1.png", alt="Single full screen site")
+										label.d-block Layout 2
+										img.d-block(src="/img/layout_images/2.png", alt="Vertical 1:1 split")
+										label.d-block Layout 3
+										img.d-block(src="/img/layout_images/3.png", alt="Horizontal 1:1 split")
+										label.d-block Layout 4
+										img.d-block(src="/img/layout_images/4.png", alt="Equal Quadrants")
+										label.d-block Layout 5
+										img.d-block(src="/img/layout_images/5.png", alt="2:1 Split Columns with Left Columns 2:1 Row split and Right Column 1:1 row split")
+
+
+
 
 							.row.mb-10
 								.col-md-12
