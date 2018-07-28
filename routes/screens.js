@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var SqlString = require('sqlstring');
 var con = require('../db_helper');
 
 var bodyParser = require('body-parser')
@@ -11,8 +11,8 @@ router.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 router.get('/view/:screenID', function(req, res, next) {
 
-    con.query("SELECT * FROM tb_sites WHERE site_ScreenId LIKE '" + req.params.screenID + "'", function (errsite, siteresult) {
-        con.query("SELECT * FROM tb_screens WHERE screen_id LIKE '" + req.params.screenID + "'", function (errscreen, screenresult) {
+    con.query("SELECT * FROM tb_sites WHERE site_ScreenId LIKE " + SqlString.escape(req.params.screenID),  function (errsite, siteresult) {
+        con.query("SELECT * FROM tb_screens WHERE screen_id LIKE " + SqlString.escape(req.params.screenID), function (errscreen, screenresult) {
             
             res.render('screen.pug', { screenID: req.params.screenID,  sites: siteresult, screeninfo: screenresult});
         }); 
@@ -42,7 +42,7 @@ router.get('/view/:screenID', function(req, res, next) {
   
   router.post('/update', function(req, res, next) {
   
-    con.query("UPDATE `db_displaymanager`.`tb_screens` SET `screen_name`='" + req.body.name + "', `screen_description`='" + req.body.description +"', `screen_layout`='" + req.body.layoutID + "' WHERE `screen_id`='" + req.body.id + "';", function (err, result) {
+    con.query("UPDATE `db_displaymanager`.`tb_screens` SET `screen_name`=" + SqlString.escape(req.body.name) + ", `screen_description`=" + SqlString.escape(req.body.description) +", `screen_layout`=" + SqlString.escape(req.body.layoutID) + " WHERE `screen_id`=" + SqlString.escape(req.body.id) + ";", function (err, result) {
         
         res.redirect("/screen/view/"+req.body.id);
     }); 

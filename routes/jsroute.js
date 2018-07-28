@@ -11,7 +11,7 @@ router.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 router.get('/view/:jsID', function(req, res, next) {
 
-    con.query("SELECT * FROM tb_js WHERE js_id LIKE '" + req.params.jsID + "'", function (errsite, jsresult) {
+    con.query("SELECT * FROM tb_js WHERE js_id LIKE " + SqlString.escape(req.params.jsID), function (errsite, jsresult) {
         res.render('js', { jsID: req.params.jsID,  jsresult: jsresult});
     }); 
   
