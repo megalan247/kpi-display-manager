@@ -47,15 +47,17 @@ block content
 									td
 										a(href='/player/view/' + player.player_id)= player.player_IP
 									td
-										if player.player_lastPing > (Date.now() - 10*60000)
+										if player.player_lastPing > (Date.now() - 60000)
 											span.badge.badge-success= "ONLINE"
-										else if player.player_lastPing > (Date.now() - 20*60000)
+										else if player.player_lastPing > (Date.now() - 5*60000)
 											span.badge.badge-warning= "LATE"
 										else
 											span.badge.badge-danger= "OFFLINE"
 									td
-										button.btn.btn-primary(type='button' onClick="sendUpdate('http://" + player.player_IP + ":4000/update')") Update Config
-										button.btn.btn-secondary(type='button' onClick="sendUpdate('http://" + player.player_IP + ":4000/upgrade')") Upgrade Application
+										a(href="http://" + player.player_IP + ":4000/update")
+											button.btn.btn-primary(type='button' target="_blank") Update Config
+										a(href="http://" + player.player_IP + ":4000/upgrade")
+											button.btn.btn-secondary(type='button' target="_blank") Upgrade Application
 
 
 
@@ -68,10 +70,3 @@ block specific-js
 			"order": [[ 1, "asc" ]],
 			"pageLength": 50
 		});
-
-	script.
-		function sendUpdate(theUrl){
-			var xmlHttp = new XMLHttpRequest();
-			xmlHttp.open("GET", theUrl, true);
-			xmlHttp.send(null);
-		}
