@@ -1,5 +1,5 @@
 var client = module.exports = require('mysql').createConnection({
-    host: "localhost",
+    host: "db",
     user: "root",
     password: "root",
     database: "db_displaymanager"

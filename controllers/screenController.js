@@ -3,13 +3,13 @@ var SqlString = require('sqlstring');
 
 exports.getScreens = function(req, res) {
     con.query("SELECT * FROM tb_screens WHERE screen_playerId LIKE \"" + req.params.playerId + "\"", function (err, result) {
-        res.send(result);
+        res.json(result);
     });    
 }
 
 exports.getElectronScreens = function(req, res) {
     con.query("SELECT * FROM tb_screens WHERE screen_electronScreenId LIKE \"" + req.params.electronId + "\"", function (err, result) {
-        res.send(result);
+        res.json(result);
     });    
 }
 
@@ -24,7 +24,7 @@ exports.registerScreen = function(req, res) {
                 con.query("INSERT INTO `db_displaymanager`.`tb_sites` (`site_id`, `site_url`, `site_description`, `site_position`, `site_screenId`) VALUES (" + SqlString.escape(token2) + ", 'http://clock.srly.io', 'This is a default description for your site!', '1', '" + token + "');", function (err2, result2) {
                     console.log(result2);
                     console.log(err2);
-                    res.send({
+                    res.json({
                         result: "success",
                         screen_id: token,
                         screen_layout: 1

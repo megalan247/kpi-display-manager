@@ -1,0 +1,19 @@
+{
+  "defaultEnv": "dev",
+  "dev": {
+    "host": "localhost",
+    "driver": "mysql",
+    "user": "user",
+    "password": "password",
+    "database": "browserbase"
+  },
+
+  "prod": {
+    "host": {"ENV": "MYSQL_HOST"},
+    "driver": "mysql",
+    "user": {"ENV": "MYSQL_USER"},
+    "password": {"ENV": "MYSQL_PASSWORD"},
+    "database": {"ENV": "MYSQL_DATABASE"}
+  }
+  
+  }

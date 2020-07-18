@@ -3,7 +3,7 @@ var SqlString = require('sqlstring');
 
 exports.listPlayers = function(req, res) {
     con.query("SELECT player_id, player_name FROM tb_players", function (err, result) {
-        res.send(result);
+        res.json(result);
     });    
 }
 
@@ -11,14 +11,14 @@ exports.createPlayer = function(req, res) {
 /*     con.query("SELECT * FROM tb_players", function (err, result) {
         res.send(result);
     });  */
-    res.send("NOT IMPLIMENTED");
+    res.json("NOT IMPLIMENTED");
 }
 
 exports.updatePlayer = function(req, res) {
   var ip = (req.headers['x-client-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim();
   var query = "UPDATE `db_displaymanager`.`tb_players` SET `player_lastPing`=" + SqlString.escape(Date.now()) + ", `player_type`=" + SqlString.escape(req.body.playerType) + ", `player_serialnumber`=" + SqlString.escape(req.body.serialNumber) + ", `player_OS`=" + SqlString.escape(req.body.OSName) + ", `player_OSVersion`=" + SqlString.escape(req.body.OSVersion) + ", `player_freeSpace`=" + SqlString.escape(req.body.freeSpace) + ", `player_CPU`=" + SqlString.escape(req.body.cpu) + ", `player_IP`=" + SqlString.escape(ip.split(':').pop()) +", `player_MAC`=" + SqlString.escape(req.body.macAddress) + " WHERE `player_id`=" + SqlString.escape(req.body.id) + ";";
   con.query(query, function (err, result) {
-    res.send(err)
+    res.json(err)
     console.log(err);
     console.log(result);
   });
@@ -27,7 +27,7 @@ exports.updatePlayer = function(req, res) {
 
 exports.getPlayer = function(req, res) {
     con.query("SELECT * FROM tb_players WHERE player_id LIKE " + SqlString.escape(req.params.playerId), function (err, result) {
-        res.send(result);
+        res.json(result);
         console.log(err);
     });
 }
@@ -41,7 +41,7 @@ exports.registerPlayer = function(req, res) {
         var sql = "INSERT INTO `db_displaymanager`.`tb_players` (`player_id`, `player_name`, `player_description`, `player_lastPing`, `player_type`, `player_location`, `player_serialnumber`, `player_roomId`, `player_OS`, `player_OSVersion`, `player_freeSpace`, `player_CPU`, `player_IP`, `player_MAC`) VALUES ('" + token + "', " + SqlString.escape(req.body.name) + ", 'Desciption', '" + SqlString.escape(Date.now()) + "', " + SqlString.escape(req.body.playerType) + ", 'Location', " + SqlString.escape(req.body.serialNumber) + ", 'temprm', " + SqlString.escape(req.body.OSName) + ", " + SqlString.escape(req.body.OSVersion) + ", 'freeSpace', 'CPU', " + SqlString.escape(ip.split(':').pop()) +", " + SqlString.escape(req.body.macAddress) + ");"
         console.log(sql);
         con.query(sql, function (err, result) {
-          res.send({
+          res.json({
               result: "success",
               id: token});
         }); 
