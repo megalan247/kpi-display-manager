@@ -26,5 +26,4 @@ services:
     ports:
       - '3000:3000'
     volumes:
-      - $PWD/storage:/storage
       - $PWD:/appdata

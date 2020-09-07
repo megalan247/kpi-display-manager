@@ -3,9 +3,9 @@
   "dev": {
     "host": "localhost",
     "driver": "mysql",
-    "user": "user",
-    "password": "password",
-    "database": "browserbase"
+    "user": "root",
+    "password": "root",
+    "database": "db_displaymanager"
   },
 
   "prod": {
