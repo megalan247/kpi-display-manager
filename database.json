@@ -11,9 +11,9 @@
   "prod": {
     "host": {"ENV": "MYSQL_HOST"},
     "driver": "mysql",
-    "user": {"ENV": "MYSQL_USER"},
-    "password": {"ENV": "MYSQL_PASSWORD"},
-    "database": {"ENV": "MYSQL_DATABASE"}
+    "user": "root",
+    "password": "root",
+    "database": "db_displaymanager"
   }
   
   }

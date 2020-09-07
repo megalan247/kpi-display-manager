@@ -1,3 +1,3 @@
 #!/bin/sh
-npx db-migrate up -e prod
-npm start-prod
+npm run migrate-prod
+npm run start-prod

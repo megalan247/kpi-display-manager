@@ -15,7 +15,9 @@ exports.createPlayer = function(req, res) {
 }
 
 exports.updatePlayer = function(req, res) {
-  var ip = (req.headers['x-client-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim();
+    console.log(req.body)
+    console.log(req.headers)
+  var ip = (req.body.ip || req.headers['x-client-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim();
   var query = "UPDATE `db_displaymanager`.`tb_players` SET `player_lastPing`=" + SqlString.escape(Date.now()) + ", `player_type`=" + SqlString.escape(req.body.playerType) + ", `player_serialnumber`=" + SqlString.escape(req.body.serialNumber) + ", `player_OS`=" + SqlString.escape(req.body.OSName) + ", `player_OSVersion`=" + SqlString.escape(req.body.OSVersion) + ", `player_freeSpace`=" + SqlString.escape(req.body.freeSpace) + ", `player_CPU`=" + SqlString.escape(req.body.cpu) + ", `player_IP`=" + SqlString.escape(ip.split(':').pop()) +", `player_MAC`=" + SqlString.escape(req.body.macAddress) + " WHERE `player_id`=" + SqlString.escape(req.body.id) + ";";
   con.query(query, function (err, result) {
     res.json(err)

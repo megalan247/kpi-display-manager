@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "start-prod": "node ./bin/www"
+    "start-prod": "node ./bin/www",
+    "migrate-prod": "npx db-migrate up -e prod"
   },
   "dependencies": {
     "async": "^3.2.0",
